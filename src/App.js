@@ -69,7 +69,7 @@ export default function App() {
   const numQuestions = questions.length;
   const maxPoints = questions.reduce((prev, curr) => prev + curr.points, 0);
   useEffect(function () {
-    fetch("http://localhost:9000/questions")
+    fetch("https://react-quiz-sathya.netlify.app/.netlify/functions/api")
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       .catch((err) => dispatch({ type: "dataFailed" }));
