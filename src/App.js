@@ -22,7 +22,7 @@ const initialState = {
   secondsRemaining: null,
 };
 function reducer(state, action) {
-  console.log(state.questions);
+  console.log(`state is:`, action.payload);
   switch (action.type) {
     case "dataReceived":
       return { ...state, questions: action.payload, status: "ready" };
@@ -66,14 +66,15 @@ export default function App() {
     { questions, status, index, answer, points, secondsRemaining },
     dispatch,
   ] = useReducer(reducer, initialState);
-  const numQuestions = questions.length;
-  const maxPoints = questions.reduce((prev, curr) => prev + curr.points, 0);
   useEffect(function () {
     fetch("https://react-quiz-sathya.netlify.app/.netlify/functions/api")
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       .catch((err) => dispatch({ type: "dataFailed" }));
   }, []);
+  const numQuestions = questions.length;
+  console.log(initialState);
+  const maxPoints = questions.reduce((prev, curr) => prev + curr.points, 0);
   return (
     <div className="app">
       <Header />
