@@ -146,6 +146,11 @@ export async function handler() {
 
   return {
     statusCode: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*", // Allow all origins
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    },
     body: JSON.stringify(data),
   };
 }
